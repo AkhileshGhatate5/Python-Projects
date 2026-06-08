@@ -1,0 +1,49 @@
+def roman_to_int(numeral: str) -> int:
+    roman_dict = {
+        'I': 1,
+        'V': 5,
+        'X': 10,
+        'L': 50,
+        'C': 100,
+        'D': 500,
+        'M': 1000
+    }
+
+    final_answer = 0
+    prev_value = 0
+
+    for char in reversed(numeral):
+        value = roman_dict[char]
+        if value >= prev_value:
+            final_answer += value
+        else:
+            final_answer -= value
+        prev_value = value
+
+    return final_answer
+
+roman_int = input("Enter the roman numerals you want to convert: ")
+result = roman_to_int(roman_int)
+print(f"The roman numerals you entered translate to: {result}!")
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#improved for complexity:
+
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        translations = {
+            "I": 1,
+            "V": 5,
+            "X": 10,
+            "L": 50,
+            "C": 100,
+            "D": 500,
+            "M": 1000
+        }
+        number = 0
+        s = s.replace("IV", "IIII").replace("IX", "VIIII")
+        s = s.replace("XL", "XXXX").replace("XC", "LXXXX")
+        s = s.replace("CD", "CCCC").replace("CM", "DCCCC")
+        for char in s:
+            number += translations[char]
+        return number
